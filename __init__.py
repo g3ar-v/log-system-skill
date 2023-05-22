@@ -23,9 +23,9 @@ from os.path import dirname, join, isfile
 import requests
 from zipfile import ZipFile, ZIP_DEFLATED
 
-import mycroft
-from mycroft import MycroftSkill, intent_handler
-from mycroft.api import DeviceApi
+import core
+from core import Skill, intent_handler
+from core.api import DeviceApi
 
 import pyaudio
 import wave
@@ -78,13 +78,13 @@ class ThreadedRecorder(Thread, AudioRecorder):
             AudioRecorder.stop(self)
 
 
-class SupportSkill(MycroftSkill):
+class SupportSkill(Skill):
     # TODO: Will need to read from config under KDE, etc.
     log_locations = [
-        "/opt/mycroft/*.json",
-        "/var/log/mycroft/*.log",
-        "/etc/mycroft/*.conf",
-        join(dirname(dirname(mycroft.__file__)), "scripts", "logs", "*.log"),
+        "/opt/core/*.json",
+        "/var/log/core/*.log",
+        "/etc/core/*.conf",
+        join(dirname(dirname(core.__file__)), "scripts", "logs", "*.log"),
     ]
     log_types = ["audio", "bus", "enclosure", "skills", "update", "voice"]
 
